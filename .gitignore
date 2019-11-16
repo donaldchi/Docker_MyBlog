@@ -1,0 +1,8 @@
+logs/
+config/__pycache__/
+config/__pycache__/*.pyc
+application/myblog/__init__.py
+config/settings/__pycache__/
+config/settings/__pycache__/*.pyc
+venv/
+memo.txt

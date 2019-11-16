@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  db:
+    image: mysql:8.0.14
+    volumes:
+      - ./logs:/var/log/mysql
+      - ./docker/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+    environment:
+      - MYSQL_DATABASE=${DB_NAME}
+      - MYSQL_USER=${DB_USER}
+      - MYSQL_PASSWORD=${DB_PASS}
+      - MYSQL_ROOT_PASSWORD=${DB_PASS}
+      - TZ=${TZ}
+    ports:
+      - ${DB_PORT}:3306
+  web:
+    build: .
+    # command: python manage.py runserver 0.0.0.0:8000 --settings=myblog.settings.base
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    tty: true
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    links:
+      - db
