@@ -30,11 +30,11 @@ jobs:
           name: run isort
           command: |
             . venv/bin/activate
-            find application/ -name '*.py' -not -path '/home/circleci/repo/venv/*'| isort -ns __init__.py -m 3 -y 
+            find config/ -name '*.py' -not -path '/home/circleci/repo/venv/*'| isort -ns __init__.py -m 3 -y 
 
             diff=$(git diff)
 
-            if [[ "${diff}" =~ application/ ]] ; then
+            if [[ "${diff}" =~ config/ ]] ; then
               git add .
               git status
               git config --global user.email "developer@ganbaruyo.net"
@@ -51,20 +51,20 @@ jobs:
           command: |
             . venv/bin/activate
             flake8 *.py
-            flake8 application/
+            flake8 config/
 
       - run:
           name: initialize db
           command: |
             . venv/bin/activate
-            python application/manage.py makemigrations --settings=myblog.settings.ci
-            python application/manage.py migrate --settings=myblog.settings.ci
+            python manage.py makemigrations --settings=config.settings.ci
+            python manage.py migrate --settings=config.settings.ci
 
       - run:
           name: run tests
           command: |
             . venv/bin/activate
-            python application/manage.py test --settings=myblog.settings.ci
+            python manage.py test --settings=config.settings.ci
 
 workflows:
   version: 2
