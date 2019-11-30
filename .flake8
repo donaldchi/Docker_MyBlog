@@ -1,4 +1,4 @@
 [flake8]
 max-line-length=100
 #  しばらく無視する
-exclude=application/myblog/settings/ci.py,application/admin.py,application/views.py,application/models.py,application/tests.py
+exclude=config/settings/ci.py
