@@ -1,4 +1,4 @@
-Django==3.0b1
+Django==3.2.24
 mysqlclient==1.4.5
 pep8==1.7.1
 isort==4.3.21
